@@ -1,0 +1,8 @@
+{
+  "name": "SharePlate — Smart Food Redistribution Platform",
+  "description": "Safe, efficient surplus food redistribution connecting food providers, verified NGOs, and volunteers with expiry-aware matching and QR pickup verification.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

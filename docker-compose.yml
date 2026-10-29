@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  shareplate-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      - JWT_SECRET=shareplate-production-secret-token-key-2026
+      - PYTHON_SERVICE_URL=http://shareplate-intelligence:8000
+      - MONGODB_URI=mongodb://mongo:27017/shareplate
+    depends_on:
+      - shareplate-intelligence
+      - mongo
+    restart: unless-stopped
+
+  shareplate-intelligence:
+    build:
+      context: .
+      dockerfile: Dockerfile.intelligence
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:6.0
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  mongo-data:
